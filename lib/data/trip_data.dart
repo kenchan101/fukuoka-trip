@@ -295,6 +295,7 @@ final List<DayOverview> overviews = const [
 /// ===== 住宿 =====
 class StayInfo {
   final String emoji;
+  final String cartoon;
   final String name;
   final String dates;
   final String status;
@@ -302,6 +303,7 @@ class StayInfo {
   final List<String> notes;
   const StayInfo({
     required this.emoji,
+    required this.cartoon,
     required this.name,
     required this.dates,
     required this.status,
@@ -313,6 +315,7 @@ class StayInfo {
 final List<StayInfo> stays = const [
   StayInfo(
     emoji: '🏨',
+    cartoon: '住宿',
     name: '博多站築紫口 F 飯店',
     dates: '5/10 – 5/12（2 晚）',
     status: '待訂',
@@ -321,6 +324,7 @@ final List<StayInfo> stays = const [
   ),
   StayInfo(
     emoji: '♨️',
+    cartoon: '溫泉旅館',
     name: '湯布院山莊吾亦紅',
     dates: '5/12 – 5/13（1 晚・一泊二食）',
     status: '已訂',
@@ -329,6 +333,7 @@ final List<StayInfo> stays = const [
   ),
   StayInfo(
     emoji: '🛏️',
+    cartoon: '住宿',
     name: '最後一晚（博多）',
     dates: '5/13 – 5/14（1 晚）',
     status: '未定',

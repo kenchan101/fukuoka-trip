@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../data/trip_data.dart';
 import '../widgets/common.dart';
+import '../widgets/cartoon_icon.dart';
 
 class StayScreen extends StatelessWidget {
   const StayScreen({super.key});
@@ -24,16 +25,7 @@ class StayScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 56,
-              height: 56,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: s.color.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(s.emoji, style: const TextStyle(fontSize: 26)),
-            ),
+            CartoonIcon(category: s.cartoon, color: s.color, size: 56),
             const SizedBox(width: 12),
             Expanded(
               child: Column(

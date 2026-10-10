@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../data/trip_data.dart';
 import '../widgets/common.dart';
+import '../widgets/cartoon_icon.dart';
 import '../widgets/hero_card.dart';
 
 class ItineraryScreen extends StatefulWidget {
@@ -37,23 +38,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
       child: AppCard(
         child: Row(
           children: [
-            Container(
-              width: 46,
-              height: 46,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: f.color.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Text(
-                f.type,
-                style: TextStyle(
-                  color: f.color,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 13,
-                ),
-              ),
-            ),
+            CartoonIcon(category: '航班', color: f.color, size: 46),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -66,12 +51,12 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                       fontSize: 15,
                     ),
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 4),
                   Text(
-                    '${f.date} · ${f.note}',
+                    '${f.type} · ${f.date} · ${f.note}',
                     style: const TextStyle(
                       color: AppColors.inkSoft,
-                      fontSize: 12.5,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -210,9 +195,9 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            width: 46,
+            width: 44,
             child: Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 14),
               child: Text(
                 it.time,
                 style: const TextStyle(
@@ -224,22 +209,18 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
             ),
           ),
           SizedBox(
-            width: 20,
+            width: 52,
             child: Column(
               children: [
-                Container(
-                  width: 13,
-                  height: 13,
-                  margin: const EdgeInsets.only(top: 16),
-                  decoration: BoxDecoration(
-                    color: it.color,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                ),
+                const SizedBox(height: 2),
+                CartoonIcon(category: it.category, color: it.color, size: 44),
                 if (!last)
                   Expanded(
-                    child: Container(width: 2, color: AppColors.line),
+                    child: Container(
+                      width: 2,
+                      margin: const EdgeInsets.only(top: 4),
+                      color: AppColors.line,
+                    ),
                   ),
               ],
             ),
@@ -247,7 +228,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
           const SizedBox(width: 6),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 12, top: 6),
+              padding: const EdgeInsets.only(bottom: 12, top: 2),
               child: AppCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
