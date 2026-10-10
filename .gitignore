@@ -16,6 +16,9 @@ build/
 /macos/
 /windows/
 
+# 本機一次性推送工具
+push-login.bat
+
 # 其他
 *.log
 .DS_Store
