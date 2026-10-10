@@ -1,0 +1,22 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+.idea/
+.vscode/
+
+# 平台資料夾由 CI 自動產生，不進版控
+/android/
+/web/
+/ios/
+/linux/
+/macos/
+/windows/
+
+# 其他
+*.log
+.DS_Store
+Thumbs.db

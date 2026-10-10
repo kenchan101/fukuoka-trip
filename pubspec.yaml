@@ -1,0 +1,14 @@
+name: fukuoka_trip
+description: 福岡・由布院 旅行助手（個人自用）
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

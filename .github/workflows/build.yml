@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    name: 編譯 APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: 產生平台資料夾
+        run: |
+          flutter create --org com.fukuokatrip --project-name fukuoka_trip --platforms=android,web /tmp/scaffold
+          cp -r /tmp/scaffold/android ./android
+          cp -r /tmp/scaffold/web ./web
+
+      - name: 取得套件
+        run: flutter pub get
+
+      - name: 靜態分析（不阻斷編譯）
+        run: flutter analyze || true
+
+      - name: 編譯 release APK
+        run: flutter build apk --release
+
+      - name: 上傳 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: fukuoka-trip-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+
+  web:
+    name: 部署網頁預覽
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: 產生平台資料夾
+        run: |
+          flutter create --org com.fukuokatrip --project-name fukuoka_trip --platforms=android,web /tmp/scaffold
+          cp -r /tmp/scaffold/android ./android
+          cp -r /tmp/scaffold/web ./web
+
+      - name: 取得套件
+        run: flutter pub get
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: 編譯網頁版
+        run: flutter build web --release --base-href "${{ steps.pages.outputs.base_path }}/"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
